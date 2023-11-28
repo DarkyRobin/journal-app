@@ -65,3 +65,10 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 6.1.0'
+end
+
+gem 'bootstrap', '~> 5.3.2'
+gem 'dartsass-sprockets'
