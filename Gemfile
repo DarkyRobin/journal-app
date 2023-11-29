@@ -73,3 +73,5 @@ end
 gem 'bootstrap', '~> 5.3.2'
 gem 'dartsass-sprockets'
 gem "cssbundling-rails", "~> 1.3"
+
+gem 'solargraph', group: :development
