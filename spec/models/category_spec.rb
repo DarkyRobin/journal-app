@@ -11,3 +11,4 @@ RSpec.describe Category, type: :model do
     expect(category.errors[:name]).to include("can't be blank")
   end
 end
+

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_28_135522) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_30_132344) do
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -26,13 +26,14 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_28_135522) do
     t.integer "category_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "completed"
     t.index ["category_id"], name: "index_tasks_on_category_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "email"
-    t.string "password"
+    t.string "password_digest"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
