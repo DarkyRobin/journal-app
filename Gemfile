@@ -76,3 +76,4 @@ gem "cssbundling-rails", "~> 1.3"
 gem 'jquery-rails'
 gem 'solargraph', group: :development
 gem 'bcrypt', '~> 3.1.7'
+gem "jsbundling-rails", "~> 1.2"
