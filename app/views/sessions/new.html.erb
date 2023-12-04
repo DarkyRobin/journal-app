@@ -1,10 +1,22 @@
-<h2>Login</h2>
-<%= form_with(url: login_path, local: true) do |f| %>
-  <%= f.label :email %>
-  <%= f.email_field :email %>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <%= form_for(:session, url: login_path) do |f| %>
+        <div class="mb-3">
+          <%= f.label :email, class: "form-label" %>
+          <%= f.email_field :email, class: "form-control", autocomplete: "email", required: true %>
+        </div>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+        <div class="mb-3">
+          <%= f.label :password, class: "form-label" %>
+          <%= f.password_field :password, class: "form-control", autocomplete: "current-password", required: true %>
+        </div>
 
-  <%= f.submit 'Log in' %>
-<% end %>
+        <%= f.submit "Log in", class: "btn btn-primary" %>
+        No account yet?<%= link_to "Sign up here", new_user_path, class: "btn btn-link" %>
+      <% end %>
+
+      
+    </div>
+  </div>
+</div>

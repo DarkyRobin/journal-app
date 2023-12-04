@@ -3,14 +3,17 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-      # Log the user in and redirect to the user's profile
-      log_in user
-      redirect_to user
+    if params[:session].present? && params[:session][:email].present? && params[:session][:password].present?
+      user = User.find_by(email: params[:session][:email].downcase)
+      if user && user.authenticate(params[:session][:password])
+        log_in user
+        redirect_to dashboard_path
+      else
+        flash.now[:danger] = 'Invalid email/password combination'
+        render 'new'
+      end
     else
-      # Display an error message and render the login form
-      flash.now[:danger] = 'Invalid email/password combination'
+      flash.now[:danger] = 'Email and password are required'
       render 'new'
     end
   end
