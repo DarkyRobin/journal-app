@@ -15,11 +15,23 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    if @user.save
-      render json: @user, status: :created
+    flash.clear
+  
+    if User.exists?(email: @user.email)
+      @user.errors.add(:email, 'has already been taken')
+      flash.now[:danger] = 'Email is already in use. Please choose a different one.'
+    elsif @user.password != @user.password_confirmation
+      @user.errors.add(:password_confirmation, "doesn't match Password")
+      flash.now[:danger] = 'Password confirmation does not match the password.'
+    elsif @user.save
+      flash[:success] = 'User was successfully created. Please log in.'
+      redirect_to login_path
+      return
     else
-      render json: @user.errors, status: :unprocessable_entity
+      flash.now[:danger] = 'User creation failed. Please check the errors below.'
     end
+  
+    render :new
   end
 
   def edit
@@ -51,7 +63,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_ocnfirmation)
+    params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
   
 end

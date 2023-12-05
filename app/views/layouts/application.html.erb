@@ -10,12 +10,8 @@
 
   </head>
 
-  <body>
+  <body class="container-fluid">
     <%= yield %>
-    <% flash.each do |key, value| %>
-      <div class="alert alert-<%= key %>">
-        <%= value %>
-      </div>
-    <% end %>
+    <%= render 'shared/flash_messages' %>
   </body>
 </html>

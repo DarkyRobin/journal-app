@@ -1,0 +1,19 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    The Journal App
+  </a>
+  <div class="collapse navbar-collapse mr-auto" id="navbarNav">
+    <ul class="navbar-nav">
+      <!-- Add your other navbar items here, if any -->
+    </ul>
+  </div>
+  <div class="ml-auto">
+    <ul class="navbar-nav">
+      <% if current_user %>
+        <li class="nav-item">
+          <%= button_to "Logout", logout_path, method: :delete, class: "btn btn-danger", data: { confirm: "Are you sure you want to log out?" } %>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+</nav>
