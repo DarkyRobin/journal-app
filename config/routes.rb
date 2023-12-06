@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
+  # Landing Page
   get 'pages/home'
   resources :users, only: [:new, :create]
-
+  resources :categories, only: [:new, :create, :edit, :update, :show]
+  
+  # User authentication and registration
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy', as: :logout
 
+  # Dashboard page
   get '/dashboard', to: 'pages#dashboard', as: :dashboard
+
+  # Categories
+
 
   root "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
