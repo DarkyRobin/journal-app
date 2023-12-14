@@ -8,9 +8,9 @@ class CategoriesController < ApplicationController
 
   def create
     @category = current_user.categories.new(category_params)
-
+  
     if @category.save
-      redirect_back fallback_location: new_category_path, success: 'Category was successfully created.'
+      redirect_to categories_path, success: 'Category was successfully created.'
     else
       flash.now[:danger] = 'Name and description cannot be empty.'
       render :new
@@ -22,16 +22,16 @@ class CategoriesController < ApplicationController
 
   def update
     if @category.update(category_params)
-      redirect_to @category, success: 'Category was successfully updated.'
+      redirect_to categories_path, success: 'Category was successfully updated.'
     else
       render :edit
     end
   end
 
   def destroy
-    debugger
+    @category = Category.find(params[:id])
     @category.destroy
-    redirect_back fallback_location: new_category_path, success: 'Category was successfully created.'
+    redirect_to categories_path, success: 'Category was successfully deleted.'
   end
 
   def show

@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   # Landing Page
   get 'pages/home'
   resources :users, only: [:new, :create]
-  resources :categories, only: [:new, :create, :edit, :update, :show]
+  resources :categories
   
   # User authentication and registration
   get '/login', to: 'sessions#new'
