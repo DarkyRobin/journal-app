@@ -1,13 +1,23 @@
 require 'rails_helper'
 
 RSpec.describe Category, type: :model do
-  it 'should not save Category without description' do
-    category = Category.new
-    category.name = "Work"
-    category.description = "Description"
-    
-    expect(category.save).to be_falsey
-    expect(category.errors[:description]).to include("can't be blank")
+  let(:user) { create(:user) }
+  it 'is valid with a name, description, and associated user' do
+    category = Category.new(
+      name: 'Example Category',
+      description: 'Example Description',
+      user: user
+    )
+    expect(category).to be_valid
+  end
+
+  it 'is invalid without a name' do
+    category = Category.new(
+      name: nil,
+      description: 'Example Description',
+      user: user
+    )
+    category.valid?
     expect(category.errors[:name]).to include("can't be blank")
   end
 end

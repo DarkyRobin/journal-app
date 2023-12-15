@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   get 'pages/home'
   resources :users, only: [:new, :create]
   resources :categories
+  resources :tasks
   
   # User authentication and registration
   get '/login', to: 'sessions#new'
@@ -10,7 +11,7 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: :logout
 
   # Dashboard page
-  get '/dashboard', to: 'pages#dashboard', as: :dashboard
+  get 'dashboard', to: 'dashboard#index'
 
   # Categories
 

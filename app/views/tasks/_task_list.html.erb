@@ -1,0 +1,33 @@
+<div class="container">
+  <div class="list-group-items d-flex justify-content-between align-items-center">
+    <div>
+      <h2>Tasks List</h2>
+    </div>
+    <div>
+      <%= link_to 'Add New', new_task_path, class: 'btn btn-sm btn-outline-primary' %>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <% if @tasks.present? %>
+        <ul class="list-group" role="list" id="task-list">
+          <% @tasks.each do |task| %>
+            <li id="task_<%= task.id %>" class="list-group-item clickable-task d-flex justify-content-between align-items-center" role="listitem">
+              <div class="task-info">
+                <strong><%= task.title %></strong>
+                <p><%= task.description %></p>
+              </div>
+              <div class="task-due">
+                <p>Due Date: <%= task.due_date.strftime('%Y-%m-%d') if task.due_date %></p>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="text-muted">No records available.</p>
+      <% end %>
+    </div>
+  </div>
+  <%= javascript_include_tag 'task_list' %>
+</div>

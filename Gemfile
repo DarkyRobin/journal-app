@@ -77,3 +77,4 @@ gem 'jquery-rails'
 gem 'solargraph', group: :development
 gem 'bcrypt', '~> 3.1.7'
 gem "jsbundling-rails", "~> 1.2"
+gem 'factory_bot_rails'
