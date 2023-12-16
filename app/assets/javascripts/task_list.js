@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function() {
       var taskId = item.id.split('_')[1];
 
       // Fetch task details by making an AJAX request (replace with your actual route)
-      fetch('/tasks/' + taskId + '.js')
+      fetch('/tasks/' + taskId + 'js')
         .then(response => response.text())
         .then(data => {
           // Update the task-details-container with the fetched details

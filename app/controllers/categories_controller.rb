@@ -30,8 +30,16 @@ class CategoriesController < ApplicationController
 
   def destroy
     @category = Category.find(params[:id])
-    @category.destroy
-    redirect_to categories_path, success: 'Category was successfully deleted.'
+    if @category.destroy
+      flash[:success] = 'Category was successfully deleted.'
+      redirect_to categories_path
+    else
+      flash[:danger] = 'Unable to delete category.'
+      redirect_to categories_path
+    end
+    rescue ActiveRecord::InvalidForeignKey
+      flash[:danger] = 'Cannot delete category with associated records.'
+      redirect_to categories_path
   end
 
   def show

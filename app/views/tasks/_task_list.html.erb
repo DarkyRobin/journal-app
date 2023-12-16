@@ -11,16 +11,20 @@
   <div class="card">
     <div class="card-body">
       <% if @tasks.present? %>
-        <ul class="list-group" role="list" id="task-list">
-          <% @tasks.each do |task| %>
-            <li id="task_<%= task.id %>" class="list-group-item clickable-task d-flex justify-content-between align-items-center" role="listitem">
-              <div class="task-info">
-                <strong><%= task.title %></strong>
-                <p><%= task.description %></p>
+        <% sorted_tasks = @tasks.sort_by(&:due_date) %>
+        <ul class="list-group list-group-numbered">
+          <% sorted_tasks.each do |task| %>
+            <% task_due_class = task.due_date.present? && task.due_date.to_date == Date.today ? 'text-danger' : '' %>
+            <li id="task_<%= task.id %>" class="list-group-item d-flex justify-content-between align-items-start">
+              <div class="ms-2 me-auto">
+                <div class="fw-bold"><%= task.title %></div>
+                <%= task.description %>
               </div>
-              <div class="task-due">
-                <p>Due Date: <%= task.due_date.strftime('%Y-%m-%d') if task.due_date %></p>
-              </div>
+              <% if task_due_class.present? %>
+                <span class="badge bg-danger rounded-pill">Due Date: <%= task.due_date.strftime('%Y-%m-%d') if task.due_date %></span>
+              <% else %>
+                <span class="badge bg-primary rounded-pill">Due Date: <%= task.due_date.strftime('%Y-%m-%d') if task.due_date %></span>
+              <% end %>
             </li>
           <% end %>
         </ul>
@@ -31,3 +35,4 @@
   </div>
   <%= javascript_include_tag 'task_list' %>
 </div>
+
